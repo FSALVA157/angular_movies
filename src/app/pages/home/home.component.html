@@ -1,1 +1,10 @@
-<p>home works!</p>
+<p>Cartelera</p>
+<div class="row" *ngIf="movies.length > 0">
+    <div class="col">
+        <app-slide-show [peliculas]="movies"></app-slide-show>
+
+    </div>
+</div>
+
+<h1 class="mt-5">Películas en Cartelera</h1>
+        <app-peliculas-poster-grid *ngIf="movies.length > 0" [listado]="movies"></app-peliculas-poster-grid>

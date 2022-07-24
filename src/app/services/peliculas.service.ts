@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { INowPlaying, Movie } from '../intefaces/now_playing_interface';
 
 
 @Injectable({
@@ -20,7 +22,15 @@ export class PeliculasService {
  getNowPlaying(){
   let url: string = "https://api.themoviedb.org/3/movie/now_playing?api_key=6d6d52189580fcb80212d917146ea0fa&language=en-US&page=${page}";
   console.log(url);
-  return this.http.get(url);
+  return this.http.get<INowPlaying>(url).pipe(
+    map(obj => {
+      return obj.results.map(pelicula => {
+        let obj_peli: Movie;
+        obj_peli = pelicula;
+        return obj_peli;
+      });
+    })
+  );
 
  }
 

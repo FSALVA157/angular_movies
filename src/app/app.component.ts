@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { PeliculasService } from './services/peliculas.service';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,6 @@ import { PeliculasService } from './services/peliculas.service';
 export class AppComponent {
   title = 'angular_movies';
 
-  constructor(
-    private servicePrueba: PeliculasService
-  ){
-    this.servicePrueba.getNowPlaying().subscribe(_peliculas => {
-      console.log(_peliculas);
-    })
-  }
+  constructor(){}
 
 }
