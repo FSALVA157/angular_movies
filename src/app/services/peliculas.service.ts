@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable, tap, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { INowPlaying, Movie } from '../intefaces/now_playing_interface';
 
@@ -13,22 +13,43 @@ export class PeliculasService {
   api_key: string = environment.api_key;
   language: string = "es-ES";
   page: number = 1;
+  isLoading: boolean = false;
 
   constructor(
     private http: HttpClient
   ) { }
 
+  get parametros(){
+    return {
+      base_url: this.base_url,
+      api_key: this.api_key,
+      language: this.language,
+      page: this.page
+    }
+  }
 
- getNowPlaying(){
-  let url: string = "https://api.themoviedb.org/3/movie/now_playing?api_key=6d6d52189580fcb80212d917146ea0fa&language=en-US&page=${page}";
-  console.log(url);
-  return this.http.get<INowPlaying>(url).pipe(
+
+ getNowPlaying(): Observable<Movie[]>{  
+  let url: string =  `${this.base_url}now_playing`;
+  
+  if(this.isLoading){
+    //el of de rxjs devuelve un Observable de lo que yo especifique
+    return of([]);
+  }
+  this.isLoading = true;
+  console.log('REALIZANDO PETICION');
+  return this.http.get<INowPlaying>(url, {params: this.parametros}).pipe(
     map(obj => {
       return obj.results.map(pelicula => {
         let obj_peli: Movie;
         obj_peli = pelicula;
+        
         return obj_peli;
       });
+    }),
+    tap(()=>{
+      this.page += 1;
+      this.isLoading = false;
     })
   );
 

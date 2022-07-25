@@ -28,7 +28,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/swiper/swiper-bundle.min.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/ngx-bar-rating/themes/br-default-theme.scss"
             ],
             "scripts": []
           },
@@ -103,5 +104,7 @@
       }
     }
   },
-  "defaultProject": "angular_movies"
+  "cli": {
+    "analytics": "0cc3acca-6d10-42db-ba48-ce502a0385b6"
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from 'src/app/intefaces/now_playing_interface';
 
+
 @Component({
   selector: 'app-peliculas-poster-grid',
   templateUrl: './peliculas-poster-grid.component.html',
@@ -15,7 +16,7 @@ export class PeliculasPosterGridComponent implements OnInit {
 
   ngOnInit(): void {
     
-    console.log({listado: this.listado});
+   
   }
 
 }
